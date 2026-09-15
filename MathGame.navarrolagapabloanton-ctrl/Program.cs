@@ -27,29 +27,59 @@ namespace MathGame.navarrolagapabloanton_ctrl
 {
     internal class Program
     {
-        public int points = 0;
 
-        public void Main(string[] args)
+        public static void Main(string[] args)
         {
+            int points = 0;
+
             while(true)
             {
                 Menu();
 
                 string? keyboard = Console.ReadLine();
 
-                switch(keyboard)
+                switch(keyboard?.ToLower())
                 {
+                    case "a":
+                        Console.Write("\n9 + 9 = ");
+
+                        keyboard = Console.ReadLine();
+
+                        int response;
+
+                        while(!int.TryParse(keyboard, out response))
+                        {
+                            Console.WriteLine("\nError, enter an integer.");
+                            keyboard = Console.ReadLine();
+                        }
+
+                        if (response == 9 + 9)
+                        {
+                            Console.WriteLine("\nYou got it! You earn 1 point!");
+                            points++;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nYou're wrong! Incorrect!");
+                        }
+
+                        break;
+
+                    case "exit":
+                        Console.WriteLine($"\nYou earned {points} points.");
+                        return;
+
                     default:
-                        Console.WriteLine("Incorrect option;" +
+                        Console.WriteLine("\nIncorrect option;" +
                             " choose an option from A to E.");
                         break;
                 }
             }
         }
 
-        public void Menu()
+        public static void Menu()
         {
-            Console.WriteLine("MATH GAME\n");
+            Console.WriteLine("\nMATH GAME\n");
 
             Console.WriteLine("A). 9 + 9 = ?");
             Console.WriteLine("B). 20 - 3 = ?");
@@ -57,41 +87,7 @@ namespace MathGame.navarrolagapabloanton_ctrl
             Console.WriteLine("D). (10 + 1) * 2 = ?");
             Console.WriteLine("E). (77 / 7) - 3 * 2 = ?");
 
-            Console.WriteLine("Choose one operation from A to E");
-        }
-        
-        /* Me quedo aquí. Se supone que tengo que ingresar la
-         * respuesta. Pero me parece que tiene que ser un
-         * entero no un string.
-        */
-        public string KeyboardInput()
-        {
-            return "";
-        }
-
-        public int Question1(int response)
-        {
-            return response == 9 + 9 ? points++ : points;
-        }
-
-        public int Question2(int response)
-        {
-            return response == 20 - 3 ? points++ : points;
-        }
-
-        public int Question3(int response)
-        {
-            return response == 91 * 4 ? points++ : points;
-        }
-
-        public int Question4(int response)
-        {
-            return response == (10 + 1) * 2 ? points++ : points;
-        }
-
-        public int Question5(int response)
-        {
-            return response == (77 / 7) - 3 * 2 ? points++ : points;
+            Console.WriteLine("\nChoose one operation from A to E. Write EXIT to exit.");
         }
     }
 }
