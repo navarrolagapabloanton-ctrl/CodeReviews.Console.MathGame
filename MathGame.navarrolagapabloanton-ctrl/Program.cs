@@ -15,7 +15,7 @@
  * 
  * 5. Deberías registrar partidas anteriores en una Lista y debería
  * haber una opción en el menú para que el usuario visualice el
- * historial de partidas anteriores.
+ * historial de partidas anteriores. ✅
  * 
  * 6. No necesitas registrar resultados en una base de datos. Una
  * vez cerrado el programa, los resultados se eliminarán. ✅
@@ -35,6 +35,7 @@
 
 using System.ComponentModel;
 using System.Diagnostics.Metrics;
+using System.Numerics;
 
 namespace MathGame.navarrolagapabloanton_ctrl
 {
@@ -63,19 +64,19 @@ namespace MathGame.navarrolagapabloanton_ctrl
                         break;
 
                     case "b":
-                        Question2();
+                        MediumLevel();
                         break;
 
                     case "c":
-                        Question3();
+                        HardLevel();
                         break;
 
                     case "d":
-                        Question4();
+                        ExtremeLevel();
                         break;
 
                     case "e":
-                        Question5();
+                        RandomLevel();
                         break;
 
                     case "f":
@@ -147,6 +148,8 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static void EasyLevel()
         {
+            points = 0;
+
             Console.Write("\n9 + 9 = ");
 
             if (InputSolution() == 9 + 9)
@@ -213,22 +216,217 @@ namespace MathGame.navarrolagapabloanton_ctrl
             points = 0;
         }
 
-        public static void Question2()
+        public static void MediumLevel()
         {
+            points = 0;
 
+            Console.Write("\n45 + 7 / 7 = ");
+
+            if (InputSolution() == 45 + 7 / 7)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n10 - 4 * 3 * 1 = ");
+
+            if (InputSolution() == 10 - 4 * 3 * 1)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n5 * 3 / 3 * 3 = ");
+
+            if (InputSolution() == 5 * 3 / 3 * 3)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n9 - 9 * 0 + 1 / 1 = ");
+
+            if (InputSolution() == 9 - 9 * 0 + 1 / 1)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n(100 - 27 + 15) * (10 / 2) * 0 = ");
+
+            if (InputSolution() == (100 - 27 + 15) * (10 / 2) * 0)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.WriteLine($"\nYou have obtained {points} points in total.");
+            mediumPoints.Add(points);
+
+            points = 0;
         }
 
-        public static void Question3()
+        public static void HardLevel()
         {
+            points = 0;
 
+            Console.Write("\n23 - 55 + 6 = ");
+
+            if (InputSolution() == 23 - 55 + 6)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n14 - -2 * 3 = ");
+
+            if (InputSolution() == 14 - -2 * 3)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n33 + -16  + 2 - 45 + (3 / 1) = ");
+
+            if (InputSolution() == 33 + -16 + 2 - 45 + (3 / 1))
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n4 / 2 * (3 - 7) + (80 + (5 * 3) - 2) = ");
+
+            if (InputSolution() == 4 / 2 * (3 - 7) + (80 + (5 * 3) - 2))
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n(10 + (-9 + 3) * 3) / 2 = ");
+
+            if (InputSolution() == (10 + (-9 + 3) * 3) / 2)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.WriteLine($"\nYou have obtained {points} points in total.");
+            hardPoints.Add(points);
+
+            points = 0;
         }
 
-        public static void Question4()
+        public static void ExtremeLevel()
         {
+            points = 0;
 
+            Console.Write("\n-74 + 86 - -90 * 0 / 1 = ");
+
+            if (InputSolution() == -74 + 86 - -90 * 0 / 1)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n((56 + -18) - (43 - 59) + 24 / 3 * 11) - 50 = ");
+
+            if (InputSolution() == ((56 + -18) - (43 - 59) + 24 / 3 * 11) - 50)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n(20 - 36) / 8 * - 3 - 24 * -2 = ");
+
+            if (InputSolution() == (20 - 36) / 8 * - 3 - 24 * -2)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n-1 + -2 - 1 - -3 + -2 + 1 - (0 - 3) - -27 * 4 = ");
+
+            if (InputSolution() == -1 + -2 - 1 - -3 + -2 + 1 - (0 -3) - -27 * 4)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.Write("\n133 -269 + (8 * 11 / 11 * (8 + 87 * 2)) * (-6 + -5 - (1 - 10 + (4 * 20) + 3) / 1) = ");
+
+            if (InputSolution() == 133  - 269 + (8 * 11 / 11 * (8 + 87 * 2)) * (-6 + -5 - (1 - 10 +(4 * 20) + 3) / 1))
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            Console.WriteLine($"\nYou have obtained {points} points in total.");
+            extremePoints.Add(points);
+
+            points = 0;
         }
 
-        public static void Question5()
+        public static void RandomLevel()
         {
 
         }
