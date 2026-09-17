@@ -22,26 +22,26 @@
  * 
  * **********************************************************************
  * 
- * - Intenta implementar niveles de dificultad.
+ * - Intenta implementar niveles de dificultad. ✅
  * - Añade un temporizador para registrar cuánto tarda el
- * usuario en terminar el juego.
+ * usuario en terminar el juego. ✅
  * - Crea una opción de 'Partida Aleatoria' donde los jugadores
- * tendrán preguntas de operaciones aleatorias.
+ * tendrán preguntas de operaciones aleatorias. ✅
  * - Para seguir el principio DRY, prueba a usar un sólo
  * método para todos los juegos. Además, revisa tu proyecto y
  * busca oportunidades para lograr la misma funcionalidad con
  * menos código, evitando la repetición siempre que sea posible.
  */
 
-using System.ComponentModel;
-using System.Diagnostics.Metrics;
-using System.Numerics;
+using System.Diagnostics;
 
 namespace MathGame.navarrolagapabloanton_ctrl
 {
     internal class Program
     {
         public static int points = 0;
+
+        public static Stopwatch stopwatch = new Stopwatch();
 
         public static List<int> easyPoints = new List<int>();
         public static List<int> mediumPoints = new List<int>();
@@ -51,13 +51,13 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static void Main(string[] args)
         {
-            while(true)
+            while (true)
             {
                 Menu();
 
                 string? keyboard = Console.ReadLine();
 
-                switch(keyboard?.ToLower())
+                switch (keyboard?.ToLower())
                 {
                     case "a":
                         EasyLevel();
@@ -80,41 +80,7 @@ namespace MathGame.navarrolagapabloanton_ctrl
                         break;
 
                     case "f":
-                        Console.WriteLine($"\nEasy mode:");
-
-                        foreach(int points in easyPoints)
-                        {
-                            Console.Write($"{points} - ");
-                        }
-
-                        Console.WriteLine($"\nMedium mode:");
-
-                        foreach (int points in mediumPoints)
-                        {
-                            Console.Write($"{points} - ");
-                        }
-
-                        Console.WriteLine($"\nHard mode:");
-
-                        foreach (int points in hardPoints)
-                        {
-                            Console.Write($"{points} - ");
-                        }
-
-                        Console.WriteLine($"\nExtreme mode:");
-
-                        foreach (int points in extremePoints)
-                        {
-                            Console.Write($"{points} - ");
-                        }
-
-                        Console.WriteLine($"\nRandom mode:");
-
-                        foreach (int points in randomPoints)
-                        {
-                            Console.Write($"{points} - ");
-                        }
-
+                        ViewPoints();
                         break;
 
 
@@ -148,6 +114,8 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static void EasyLevel()
         {
+            stopwatch.Start();
+
             points = 0;
 
             Console.Write("\n9 + 9 = ");
@@ -210,14 +178,22 @@ namespace MathGame.navarrolagapabloanton_ctrl
                 Console.WriteLine("\nYou're wrong! Incorrect!");
             }
 
+            stopwatch.Stop();
+
             Console.WriteLine($"\nYou have obtained {points} points in total.");
+            Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
+
             easyPoints.Add(points);
+
+            stopwatch.Reset();
 
             points = 0;
         }
 
         public static void MediumLevel()
         {
+            stopwatch.Start();
+
             points = 0;
 
             Console.Write("\n45 + 7 / 7 = ");
@@ -280,14 +256,22 @@ namespace MathGame.navarrolagapabloanton_ctrl
                 Console.WriteLine("\nYou're wrong! Incorrect!");
             }
 
+            stopwatch.Stop();
+
             Console.WriteLine($"\nYou have obtained {points} points in total.");
+            Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
+
             mediumPoints.Add(points);
+
+            stopwatch.Reset();
 
             points = 0;
         }
 
         public static void HardLevel()
         {
+            stopwatch.Start();
+
             points = 0;
 
             Console.Write("\n23 - 55 + 6 = ");
@@ -350,14 +334,22 @@ namespace MathGame.navarrolagapabloanton_ctrl
                 Console.WriteLine("\nYou're wrong! Incorrect!");
             }
 
+            stopwatch.Stop();
+
             Console.WriteLine($"\nYou have obtained {points} points in total.");
+            Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
+
             hardPoints.Add(points);
+
+            stopwatch.Reset();
 
             points = 0;
         }
 
         public static void ExtremeLevel()
         {
+            stopwatch.Start();
+
             points = 0;
 
             Console.Write("\n-74 + 86 - -90 * 0 / 1 = ");
@@ -386,7 +378,7 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
             Console.Write("\n(20 - 36) / 8 * - 3 - 24 * -2 = ");
 
-            if (InputSolution() == (20 - 36) / 8 * - 3 - 24 * -2)
+            if (InputSolution() == (20 - 36) / 8 * -3 - 24 * -2)
             {
                 Console.WriteLine("\nYou got it! You earn 1 point!");
                 points++;
@@ -398,7 +390,7 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
             Console.Write("\n-1 + -2 - 1 - -3 + -2 + 1 - (0 - 3) - -27 * 4 = ");
 
-            if (InputSolution() == -1 + -2 - 1 - -3 + -2 + 1 - (0 -3) - -27 * 4)
+            if (InputSolution() == -1 + -2 - 1 - -3 + -2 + 1 - (0 - 3) - -27 * 4)
             {
                 Console.WriteLine("\nYou got it! You earn 1 point!");
                 points++;
@@ -410,7 +402,7 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
             Console.Write("\n133 -269 + (8 * 11 / 11 * (8 + 87 * 2)) * (-6 + -5 - (1 - 10 + (4 * 20) + 3) / 1) = ");
 
-            if (InputSolution() == 133  - 269 + (8 * 11 / 11 * (8 + 87 * 2)) * (-6 + -5 - (1 - 10 +(4 * 20) + 3) / 1))
+            if (InputSolution() == 133 - 269 + (8 * 11 / 11 * (8 + 87 * 2)) * (-6 + -5 - (1 - 10 + (4 * 20) + 3) / 1))
             {
                 Console.WriteLine("\nYou got it! You earn 1 point!");
                 points++;
@@ -420,15 +412,121 @@ namespace MathGame.navarrolagapabloanton_ctrl
                 Console.WriteLine("\nYou're wrong! Incorrect!");
             }
 
+            stopwatch.Stop();
+
             Console.WriteLine($"\nYou have obtained {points} points in total.");
+            Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
+
             extremePoints.Add(points);
+
+            stopwatch.Reset();
 
             points = 0;
         }
 
         public static void RandomLevel()
         {
+            stopwatch.Start();
 
+            points = 0;
+
+            Random random = new Random();
+
+            int numberA = random.Next(0, 100);
+            int numberB = random.Next(0, 100);
+
+            Console.Write($"\n{numberA} + {numberB} = ");
+
+            if (InputSolution() == numberA + numberB)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            numberA = random.Next(0, 100);
+            numberB = random.Next(0, 100);
+
+            Console.Write($"\n{numberA} - {numberB} = ");
+
+            if (InputSolution() == numberA - numberB)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            numberA = random.Next(0, 100);
+            numberB = random.Next(0, 100);
+
+            Console.Write($"\n{numberA} * {numberB} = ");
+
+            if (InputSolution() == numberA * numberB)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            numberA = random.Next(0, 100);
+            numberB = random.Next(1, 100);
+
+            while (numberA < numberB)
+            {
+                numberA = random.Next(0, 100);
+            }
+
+            while (numberA % numberB != 0)
+            {
+                numberB = random.Next(1, 10);
+            }
+
+            Console.Write($"\n{numberA} / {numberB} = ");
+
+            if (InputSolution() == numberA / numberB)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            numberA = random.Next(0, 100);
+            numberB = random.Next(0, 100);
+
+            Console.Write($"\n({numberA} + {numberB}) - {numberB} * {numberA} = ");
+
+            if (InputSolution() == (numberA + numberB) - numberB * numberA)
+            {
+                Console.WriteLine("\nYou got it! You earn 1 point!");
+                points++;
+            }
+            else
+            {
+                Console.WriteLine("\nYou're wrong! Incorrect!");
+            }
+
+            stopwatch.Stop();
+
+            Console.WriteLine($"\nYou have obtained {points} points in total.");
+            Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
+
+            randomPoints.Add(points);
+
+            stopwatch.Reset();
+
+            points = 0;
         }
 
         public static int InputSolution()
@@ -444,6 +542,44 @@ namespace MathGame.navarrolagapabloanton_ctrl
             }
 
             return response;
+        }
+
+        public static void ViewPoints()
+        {
+            Console.WriteLine($"\nEasy mode:");
+
+            foreach (int points in easyPoints)
+            {
+                Console.Write($"{points} - ");
+            }
+
+            Console.WriteLine($"\nMedium mode:");
+
+            foreach (int points in mediumPoints)
+            {
+                Console.Write($"{points} - ");
+            }
+
+            Console.WriteLine($"\nHard mode:");
+
+            foreach (int points in hardPoints)
+            {
+                Console.Write($"{points} - ");
+            }
+
+            Console.WriteLine($"\nExtreme mode:");
+
+            foreach (int points in extremePoints)
+            {
+                Console.Write($"{points} - ");
+            }
+
+            Console.WriteLine($"\nRandom mode:");
+
+            foreach (int points in randomPoints)
+            {
+                Console.Write($"{points} - ");
+            }
         }
     }
 }
