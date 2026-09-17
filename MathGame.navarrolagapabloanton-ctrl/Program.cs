@@ -11,7 +11,7 @@
  * entero. ✅
  * 
  * 4. A los usuarios se les debe mostrar un menú para elegir una
- * operación. ✅
+ * opción. ✅
  * 
  * 5. Deberías registrar partidas anteriores en una Lista y debería
  * haber una opción en el menú para que el usuario visualice el
