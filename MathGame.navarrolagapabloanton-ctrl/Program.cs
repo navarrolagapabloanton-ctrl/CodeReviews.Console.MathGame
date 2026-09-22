@@ -43,10 +43,10 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static Stopwatch stopwatch = new Stopwatch();
 
-        public static List<int> easyPoints = new List<int>();
-        public static List<int> mediumPoints = new List<int>();
-        public static List<int> hardPoints = new List<int>();
-        public static List<int> extremePoints = new List<int>();
+        public static List<int> additionPoints = new List<int>();
+        public static List<int> subtractionPoints = new List<int>();
+        public static List<int> multiplicationPoints = new List<int>();
+        public static List<int> divisionPoints = new List<int>();
         public static List<int> randomPoints = new List<int>();
 
         public static void Main(string[] args)
@@ -60,23 +60,23 @@ namespace MathGame.navarrolagapabloanton_ctrl
                 switch (keyboard?.ToLower())
                 {
                     case "a":
-                        EasyLevel();
+                        AdditionGame();
                         break;
 
                     case "b":
-                        MediumLevel();
+                        SubtractionGame();
                         break;
 
                     case "c":
-                        HardLevel();
+                        MultiplicationGame();
                         break;
 
                     case "d":
-                        ExtremeLevel();
+                        DivisionGame();
                         break;
 
                     case "e":
-                        RandomLevel();
+                        RandomGame();
                         break;
 
                     case "f":
@@ -100,10 +100,10 @@ namespace MathGame.navarrolagapabloanton_ctrl
         {
             Console.WriteLine("\nMATH GAME\n");
 
-            Console.WriteLine("A). Easy.");
-            Console.WriteLine("B). Medium.");
-            Console.WriteLine("C). Hard.");
-            Console.WriteLine("D). Extreme.");
+            Console.WriteLine("A). Addition operations.");
+            Console.WriteLine("B). Subtraction operations.");
+            Console.WriteLine("C). Multiplication operations.");
+            Console.WriteLine("D). Division operations.");
 
             Console.WriteLine("\nE). Random operations.");
 
@@ -112,70 +112,28 @@ namespace MathGame.navarrolagapabloanton_ctrl
             Console.WriteLine("\n\nChoose one option from A to F. Write EXIT to exit..");
         }
 
-        public static void EasyLevel()
+        public static void AdditionGame()
         {
             stopwatch.Start();
 
             points = 0;
 
-            Console.Write("\n9 + 9 = ");
+            for (int i = 0; i < 5; i++)
+            {
+                int numberA = RandomNum(0);
+                int numberB = RandomNum(0);
 
-            if (InputSolution() == 9 + 9)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
+                Console.Write($"\n{i + 1}. {numberA} + {numberB} = ");
 
-            Console.Write("\n20 - 3 = ");
-
-            if (InputSolution() == 20 - 3)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n91 * 4 = ");
-
-            if (InputSolution() == 91 * 4)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n(10 + 1) * 2 = ");
-
-            if (InputSolution() == (10 + 1) * 2)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n(77 / 7) - 3 * 2 = ");
-
-            if (InputSolution() == (77 / 7) - 3 * 2)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
+                if (CheckingSum(numberA, numberB, InputSolution()))
+                {
+                    Console.WriteLine("\nGreat! You have obtained 1 point!");
+                    points++;
+                }
+                else
+                {
+                    Console.WriteLine("\nYou're wrong! Incorrect solution.");
+                }
             }
 
             stopwatch.Stop();
@@ -183,77 +141,36 @@ namespace MathGame.navarrolagapabloanton_ctrl
             Console.WriteLine($"\nYou have obtained {points} points in total.");
             Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
 
-            easyPoints.Add(points);
+            additionPoints.Add(points);
 
             stopwatch.Reset();
 
             points = 0;
+
         }
 
-        public static void MediumLevel()
+        public static void SubtractionGame()
         {
             stopwatch.Start();
 
             points = 0;
 
-            Console.Write("\n45 + 7 / 7 = ");
+            for (int i = 0; i < 5; i++)
+            {
+                int numberA = RandomNum(0);
+                int numberB = RandomNum(0);
 
-            if (InputSolution() == 45 + 7 / 7)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
+                Console.Write($"\n{i + 1}. {numberA} - {numberB} = ");
 
-            Console.Write("\n10 - 4 * 3 * 1 = ");
-
-            if (InputSolution() == 10 - 4 * 3 * 1)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n5 * 3 / 3 * 3 = ");
-
-            if (InputSolution() == 5 * 3 / 3 * 3)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n9 - 9 * 0 + 1 / 1 = ");
-
-            if (InputSolution() == 9 - 9 * 0 + 1 / 1)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n(100 - 27 + 15) * (10 / 2) * 0 = ");
-
-            if (InputSolution() == (100 - 27 + 15) * (10 / 2) * 0)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
+                if (CheckingSubstraction(numberA, numberB, InputSolution()))
+                {
+                    Console.WriteLine("\nGreat! You have obtained 1 point!");
+                    points++;
+                }
+                else
+                {
+                    Console.WriteLine("\nYou're wrong! Incorrect solution.");
+                }
             }
 
             stopwatch.Stop();
@@ -261,77 +178,35 @@ namespace MathGame.navarrolagapabloanton_ctrl
             Console.WriteLine($"\nYou have obtained {points} points in total.");
             Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
 
-            mediumPoints.Add(points);
+            subtractionPoints.Add(points);
 
             stopwatch.Reset();
 
             points = 0;
         }
 
-        public static void HardLevel()
+        public static void MultiplicationGame()
         {
             stopwatch.Start();
 
             points = 0;
 
-            Console.Write("\n23 - 55 + 6 = ");
+            for (int i = 0; i < 5; i++)
+            {
+                int numberA = RandomNum(0);
+                int numberB = RandomNum(0);
 
-            if (InputSolution() == 23 - 55 + 6)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
+                Console.Write($"\n{i + 1}. {numberA} * {numberB} = ");
 
-            Console.Write("\n14 - -2 * 3 = ");
-
-            if (InputSolution() == 14 - -2 * 3)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n33 + -16  + 2 - 45 + (3 / 1) = ");
-
-            if (InputSolution() == 33 + -16 + 2 - 45 + (3 / 1))
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n4 / 2 * (3 - 7) + (80 + (5 * 3) - 2) = ");
-
-            if (InputSolution() == 4 / 2 * (3 - 7) + (80 + (5 * 3) - 2))
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n(10 + (-9 + 3) * 3) / 2 = ");
-
-            if (InputSolution() == (10 + (-9 + 3) * 3) / 2)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
+                if (CheckingMultiplication(numberA, numberB, InputSolution()))
+                {
+                    Console.WriteLine("\nGreat! You have obtained 1 point!");
+                    points++;
+                }
+                else
+                {
+                    Console.WriteLine("\nYou're wrong! Incorrect solution.");
+                }
             }
 
             stopwatch.Stop();
@@ -339,77 +214,45 @@ namespace MathGame.navarrolagapabloanton_ctrl
             Console.WriteLine($"\nYou have obtained {points} points in total.");
             Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
 
-            hardPoints.Add(points);
+            multiplicationPoints.Add(points);
 
             stopwatch.Reset();
 
             points = 0;
         }
 
-        public static void ExtremeLevel()
+        public static void DivisionGame()
         {
             stopwatch.Start();
 
             points = 0;
 
-            Console.Write("\n-74 + 86 - -90 * 0 / 1 = ");
+            for (int i = 0; i < 5; i++)
+            {
+                int numberA = RandomNum(0);
+                int numberB = RandomNum(0);
 
-            if (InputSolution() == -74 + 86 - -90 * 0 / 1)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
+                while (numberA < numberB)
+                {
+                    numberA = RandomNum(0);
+                }
 
-            Console.Write("\n((56 + -18) - (43 - 59) + 24 / 3 * 11) - 50 = ");
+                while (numberA % numberB != 0)
+                {
+                    numberB = RandomNum(0) + 1;
+                }
 
-            if (InputSolution() == ((56 + -18) - (43 - 59) + 24 / 3 * 11) - 50)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
+                Console.Write($"\n{i + 1}. {numberA} / {numberB} = ");
 
-            Console.Write("\n(20 - 36) / 8 * - 3 - 24 * -2 = ");
-
-            if (InputSolution() == (20 - 36) / 8 * -3 - 24 * -2)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n-1 + -2 - 1 - -3 + -2 + 1 - (0 - 3) - -27 * 4 = ");
-
-            if (InputSolution() == -1 + -2 - 1 - -3 + -2 + 1 - (0 - 3) - -27 * 4)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            Console.Write("\n133 -269 + (8 * 11 / 11 * (8 + 87 * 2)) * (-6 + -5 - (1 - 10 + (4 * 20) + 3) / 1) = ");
-
-            if (InputSolution() == 133 - 269 + (8 * 11 / 11 * (8 + 87 * 2)) * (-6 + -5 - (1 - 10 + (4 * 20) + 3) / 1))
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
+                if (CheckingDivision(numberA, numberB, InputSolution()))
+                {
+                    Console.WriteLine("\nGreat! You have obtained 1 point!");
+                    points++;
+                }
+                else
+                {
+                    Console.WriteLine("\nYou're wrong! Incorrect solution.");
+                }
             }
 
             stopwatch.Stop();
@@ -417,104 +260,96 @@ namespace MathGame.navarrolagapabloanton_ctrl
             Console.WriteLine($"\nYou have obtained {points} points in total.");
             Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
 
-            extremePoints.Add(points);
+            divisionPoints.Add(points);
 
             stopwatch.Reset();
 
             points = 0;
         }
 
-        public static void RandomLevel()
+        public static void RandomGame()
         {
             stopwatch.Start();
 
             points = 0;
 
-            Random random = new Random();
+            stopwatch.Start();
 
-            int numberA = random.Next(0, 100);
-            int numberB = random.Next(0, 100);
+            points = 0;
 
-            Console.Write($"\n{numberA} + {numberB} = ");
-
-            if (InputSolution() == numberA + numberB)
+            for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
+                int numberA = RandomNum(0);
+                int numberB = RandomNum(0);
 
-            numberA = random.Next(0, 100);
-            numberB = random.Next(0, 100);
+                int randomOperation = RandomNum(0); // 0-25 (Addition), 25-50 (Substraction), 50-75 (Multiplication) and 75-100 (Division).
 
-            Console.Write($"\n{numberA} - {numberB} = ");
+                if (randomOperation <= 25)
+                {
+                    Console.Write($"\n{i + 1}. {numberA} + {numberB} = ");
 
-            if (InputSolution() == numberA - numberB)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
+                    if (CheckingSum(numberA, numberB, InputSolution()))
+                    {
+                        Console.WriteLine("\nGreat! You have obtained 1 point!");
+                        points++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYou're wrong! Incorrect solution.");
+                    }
+                }
+                else if (randomOperation > 25 && randomOperation <= 50)
+                {
+                    Console.Write($"\n{i + 1}. {numberA} - {numberB} = ");
 
-            numberA = random.Next(0, 100);
-            numberB = random.Next(0, 100);
+                    if (CheckingSubstraction(numberA, numberB, InputSolution()))
+                    {
+                        Console.WriteLine("\nGreat! You have obtained 1 point!");
+                        points++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYou're wrong! Incorrect solution.");
+                    }
+                }
+                else if (randomOperation > 50 && randomOperation <= 75)
+                {
+                    Console.Write($"\n{i + 1}. {numberA} * {numberB} = ");
 
-            Console.Write($"\n{numberA} * {numberB} = ");
+                    if (CheckingMultiplication(numberA, numberB, InputSolution()))
+                    {
+                        Console.WriteLine("\nGreat! You have obtained 1 point!");
+                        points++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYou're wrong! Incorrect solution.");
+                    }
+                }
+                else
+                {
+                    while (numberA < numberB)
+                    {
+                        numberA = RandomNum(0);
+                    }
 
-            if (InputSolution() == numberA * numberB)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
+                    while (numberA % numberB != 0)
+                    {
+                        numberB = RandomNum(0) + 1;
+                    }
 
-            numberA = random.Next(0, 100);
-            numberB = random.Next(1, 100);
+                    Console.Write($"\n{i + 1}. {numberA} / {numberB} = ");
 
-            while (numberA < numberB)
-            {
-                numberA = random.Next(0, 100);
-            }
-
-            while (numberA % numberB != 0)
-            {
-                numberB = random.Next(1, 10);
-            }
-
-            Console.Write($"\n{numberA} / {numberB} = ");
-
-            if (InputSolution() == numberA / numberB)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
-            }
-
-            numberA = random.Next(0, 100);
-            numberB = random.Next(0, 100);
-
-            Console.Write($"\n({numberA} + {numberB}) - {numberB} * {numberA} = ");
-
-            if (InputSolution() == (numberA + numberB) - numberB * numberA)
-            {
-                Console.WriteLine("\nYou got it! You earn 1 point!");
-                points++;
-            }
-            else
-            {
-                Console.WriteLine("\nYou're wrong! Incorrect!");
+                    if (CheckingDivision(numberA, numberB, InputSolution()))
+                    {
+                        Console.WriteLine("\nGreat! You have obtained 1 point!");
+                        points++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYou're wrong! Incorrect solution.");
+                    }
+                }
             }
 
             stopwatch.Stop();
@@ -544,37 +379,64 @@ namespace MathGame.navarrolagapabloanton_ctrl
             return response;
         }
 
+        public static int RandomNum(int num)
+        {
+            Random random = new Random();
+
+            return random.Next(0, 100);
+        }
+
+        public static bool CheckingSum(int num1, int num2, int result)
+        {
+            return num1 + num2 == result;
+        }
+
+        public static bool CheckingSubstraction(int num1, int num2, int result)
+        {
+            return num1 - num2 == result;
+        }
+
+        public static bool CheckingMultiplication(int num1, int num2, int result)
+        {
+            return num1 * num2 == result;
+        }
+
+        public static bool CheckingDivision(int num1, int num2, int result)
+        {
+            return num1 / num2 == result;
+        }
+
         public static void ViewPoints()
         {
-            Console.WriteLine($"\nEasy mode:");
+            Console.WriteLine($"\nAdditions option:");
 
-            foreach (int points in easyPoints)
+            foreach (int points in additionPoints)
             {
                 Console.Write($"{points} - ");
             }
 
-            Console.WriteLine($"\nMedium mode:");
+            Console.WriteLine($"\nSubtractions option:");
 
-            foreach (int points in mediumPoints)
+            foreach (int points in subtractionPoints)
             {
                 Console.Write($"{points} - ");
             }
 
-            Console.WriteLine($"\nHard mode:");
+            Console.WriteLine($"\nMultiplications options:");
 
-            foreach (int points in hardPoints)
+            foreach (int points in multiplicationPoints)
             {
                 Console.Write($"{points} - ");
             }
 
-            Console.WriteLine($"\nExtreme mode:");
+            Console.WriteLine($"\nDivisions option:");
 
-            foreach (int points in extremePoints)
+            foreach (int points in divisionPoints)
             {
                 Console.Write($"{points} - ");
             }
 
-            Console.WriteLine($"\nRandom mode:");
+            Console.WriteLine($"\nRandom option:");
 
             foreach (int points in randomPoints)
             {
