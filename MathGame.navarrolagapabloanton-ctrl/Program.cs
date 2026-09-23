@@ -30,7 +30,7 @@
  * - Para seguir el principio DRY, prueba a usar un sólo
  * método para todos los juegos. Además, revisa tu proyecto y
  * busca oportunidades para lograr la misma funcionalidad con
- * menos código, evitando la repetición siempre que sea posible.
+ * menos código, evitando la repetición siempre que sea posible. ✅
  */
 
 using System.Diagnostics;
@@ -53,7 +53,7 @@ namespace MathGame.navarrolagapabloanton_ctrl
         {
             while (true)
             {
-                Menu();
+                MainMenu();
 
                 string? keyboard = Console.ReadLine();
 
@@ -96,7 +96,7 @@ namespace MathGame.navarrolagapabloanton_ctrl
             }
         }
 
-        public static void Menu()
+        public static void MainMenu()
         {
             Console.WriteLine("\nMATH GAME\n");
 
@@ -112,29 +112,24 @@ namespace MathGame.navarrolagapabloanton_ctrl
             Console.WriteLine("\n\nChoose one option from A to F. Write EXIT to exit..");
         }
 
+        public static void DifficultMenu()
+        {
+            Console.WriteLine("\nDifficult level\n");
+
+            Console.WriteLine("A). Easy.");
+            Console.WriteLine("B). Normal.");
+            Console.WriteLine("C). Hard.");
+
+            Console.WriteLine("\n\nChoose one option from A to C.");
+        }
+
         public static void AdditionGame()
         {
             stopwatch.Start();
 
             points = 0;
 
-            for (int i = 0; i < 5; i++)
-            {
-                int numberA = RandomNum(0);
-                int numberB = RandomNum(0);
-
-                Console.Write($"\n{i + 1}. {numberA} + {numberB} = ");
-
-                if (CheckingSum(numberA, numberB, InputSolution()))
-                {
-                    Console.WriteLine("\nGreat! You have obtained 1 point!");
-                    points++;
-                }
-                else
-                {
-                    Console.WriteLine("\nYou're wrong! Incorrect solution.");
-                }
-            }
+            AdditionQuestions();
 
             stopwatch.Stop();
 
@@ -149,20 +144,18 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         }
 
-        public static void SubtractionGame()
+        public static void AdditionQuestions()
         {
-            stopwatch.Start();
-
-            points = 0;
+            string difficulty = InputLevel();
 
             for (int i = 0; i < 5; i++)
             {
-                int numberA = RandomNum(0);
-                int numberB = RandomNum(0);
+                int numberA = RandomNum(difficulty);
+                int numberB = RandomNum(difficulty);
 
-                Console.Write($"\n{i + 1}. {numberA} - {numberB} = ");
+                Console.Write($"\n{i + 1}. {numberA} + {numberB} = ");
 
-                if (CheckingSubstraction(numberA, numberB, InputSolution()))
+                if (CheckingSum(numberA, numberB, InputSolution()))
                 {
                     Console.WriteLine("\nGreat! You have obtained 1 point!");
                     points++;
@@ -172,6 +165,16 @@ namespace MathGame.navarrolagapabloanton_ctrl
                     Console.WriteLine("\nYou're wrong! Incorrect solution.");
                 }
             }
+        }
+
+
+        public static void SubtractionGame()
+        {
+            stopwatch.Start();
+
+            points = 0;
+
+            SubstractionQuestions();
 
             stopwatch.Stop();
 
@@ -185,20 +188,18 @@ namespace MathGame.navarrolagapabloanton_ctrl
             points = 0;
         }
 
-        public static void MultiplicationGame()
+        public static void SubstractionQuestions()
         {
-            stopwatch.Start();
-
-            points = 0;
+            string difficulty = InputLevel();
 
             for (int i = 0; i < 5; i++)
             {
-                int numberA = RandomNum(0);
-                int numberB = RandomNum(0);
+                int numberA = RandomNum(difficulty);
+                int numberB = RandomNum(difficulty);
 
-                Console.Write($"\n{i + 1}. {numberA} * {numberB} = ");
+                Console.Write($"\n{i + 1}. {numberA} - {numberB} = ");
 
-                if (CheckingMultiplication(numberA, numberB, InputSolution()))
+                if (CheckingSubstraction(numberA, numberB, InputSolution()))
                 {
                     Console.WriteLine("\nGreat! You have obtained 1 point!");
                     points++;
@@ -208,6 +209,15 @@ namespace MathGame.navarrolagapabloanton_ctrl
                     Console.WriteLine("\nYou're wrong! Incorrect solution.");
                 }
             }
+        }
+
+        public static void MultiplicationGame()
+        {
+            stopwatch.Start();
+
+            points = 0;
+
+            MultiplicationQuestions();
 
             stopwatch.Stop();
 
@@ -221,25 +231,71 @@ namespace MathGame.navarrolagapabloanton_ctrl
             points = 0;
         }
 
+        public static void MultiplicationQuestions()
+        {
+            string difficulty = InputLevel();
+
+            for (int i = 0; i < 5; i++)
+            {
+                int numberA = RandomNum(difficulty);
+                int numberB = RandomNum(difficulty);
+
+                Console.Write($"\n{i + 1}. {numberA} * {numberB} = ");
+
+                if (CheckingMultiplication(numberA, numberB, InputSolution()))
+                {
+                    Console.WriteLine("\nGreat! You have obtained 1 point!");
+                    points++;
+                }
+                else
+                {
+                    Console.WriteLine("\nYou're wrong! Incorrect solution.");
+                }
+            }
+        }
+
         public static void DivisionGame()
         {
             stopwatch.Start();
 
             points = 0;
 
+            DivisionQuestions();
+
+            stopwatch.Stop();
+
+            Console.WriteLine($"\nYou have obtained {points} points in total.");
+            Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
+
+            divisionPoints.Add(points);
+
+            stopwatch.Reset();
+
+            points = 0;
+        }
+
+        public static void DivisionQuestions()
+        {
+            string difficulty = InputLevel();
+
             for (int i = 0; i < 5; i++)
             {
-                int numberA = RandomNum(0);
-                int numberB = RandomNum(0);
+                int numberA = RandomNum(difficulty);
+                int numberB = RandomNum(difficulty) + 1;
 
                 while (numberA < numberB)
                 {
-                    numberA = RandomNum(0);
+                    numberA = RandomNum(difficulty);
                 }
 
                 while (numberA % numberB != 0)
                 {
-                    numberB = RandomNum(0) + 1;
+                    numberB = RandomNum(difficulty);
+
+                    if (numberB == 0)
+                    {
+                        numberB += numberB + 1;
+                    }
                 }
 
                 Console.Write($"\n{i + 1}. {numberA} / {numberB} = ");
@@ -254,17 +310,6 @@ namespace MathGame.navarrolagapabloanton_ctrl
                     Console.WriteLine("\nYou're wrong! Incorrect solution.");
                 }
             }
-
-            stopwatch.Stop();
-
-            Console.WriteLine($"\nYou have obtained {points} points in total.");
-            Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
-
-            divisionPoints.Add(points);
-
-            stopwatch.Reset();
-
-            points = 0;
         }
 
         public static void RandomGame()
@@ -273,16 +318,30 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
             points = 0;
 
-            stopwatch.Start();
+            RandomQuestions();
+
+            stopwatch.Stop();
+
+            Console.WriteLine($"\nYou have obtained {points} points in total.");
+            Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
+
+            randomPoints.Add(points);
+
+            stopwatch.Reset();
 
             points = 0;
+        }
+
+        public static void RandomQuestions()
+        {
+            string difficulty = InputLevel();
 
             for (int i = 0; i < 5; i++)
             {
-                int numberA = RandomNum(0);
-                int numberB = RandomNum(0);
+                int numberA = RandomNum(difficulty);
+                int numberB = RandomNum(difficulty) + 1;
 
-                int randomOperation = RandomNum(0); // 0-25 (Addition), 25-50 (Substraction), 50-75 (Multiplication) and 75-100 (Division).
+                int randomOperation = RandomNum("b"); // 0-25 (Addition), 25-50 (Substraction), 50-75 (Multiplication) and 75-100 (Division).
 
                 if (randomOperation <= 25)
                 {
@@ -330,12 +389,17 @@ namespace MathGame.navarrolagapabloanton_ctrl
                 {
                     while (numberA < numberB)
                     {
-                        numberA = RandomNum(0);
+                        numberA = RandomNum(difficulty);
                     }
 
                     while (numberA % numberB != 0)
                     {
-                        numberB = RandomNum(0) + 1;
+                        numberB = RandomNum(difficulty);
+
+                        if (numberB == 0)
+                        {
+                            numberB += numberB + 1;
+                        }
                     }
 
                     Console.Write($"\n{i + 1}. {numberA} / {numberB} = ");
@@ -351,17 +415,6 @@ namespace MathGame.navarrolagapabloanton_ctrl
                     }
                 }
             }
-
-            stopwatch.Stop();
-
-            Console.WriteLine($"\nYou have obtained {points} points in total.");
-            Console.WriteLine($"Time: {stopwatch.Elapsed:mm\\:ss}");
-
-            randomPoints.Add(points);
-
-            stopwatch.Reset();
-
-            points = 0;
         }
 
         public static int InputSolution()
@@ -379,11 +432,55 @@ namespace MathGame.navarrolagapabloanton_ctrl
             return response;
         }
 
-        public static int RandomNum(int num)
+        public static string InputLevel()
+        {
+            
+
+            while (true)
+            {
+                DifficultMenu();
+
+                string? keyboard = Console.ReadLine();
+
+                switch (keyboard?.ToLower())
+                {
+                    case "a":
+                        return "a";
+
+                    case "b":
+                        return "b";
+
+                    case "c":
+                        return "c";
+
+                    default:
+                        Console.WriteLine("\nIncorrect option;" +
+                            " choose an option from A to C.");
+                        break;
+                }
+            }
+        }
+
+        public static int RandomNum(string input)
         {
             Random random = new Random();
 
-            return random.Next(0, 100);
+            if (input.ToLower() == "a")
+            {
+                return random.Next(0, 11);
+            }
+            else if (input.ToLower() == "b")
+            {
+                return random.Next(0, 101);
+            }
+            else if (input.ToLower() == "c")
+            {
+                return random.Next(0, 1001);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public static bool CheckingSum(int num1, int num2, int result)
