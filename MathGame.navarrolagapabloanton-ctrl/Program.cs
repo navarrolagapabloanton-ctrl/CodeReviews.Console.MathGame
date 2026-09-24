@@ -125,8 +125,6 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static void AdditionGame()
         {
-            stopwatch.Start();
-
             points = 0;
 
             AdditionQuestions();
@@ -147,6 +145,8 @@ namespace MathGame.navarrolagapabloanton_ctrl
         public static void AdditionQuestions()
         {
             string difficulty = InputLevel();
+
+            stopwatch.Start();
 
             for (int i = 0; i < 5; i++)
             {
@@ -170,8 +170,6 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static void SubtractionGame()
         {
-            stopwatch.Start();
-
             points = 0;
 
             SubstractionQuestions();
@@ -191,6 +189,8 @@ namespace MathGame.navarrolagapabloanton_ctrl
         public static void SubstractionQuestions()
         {
             string difficulty = InputLevel();
+
+            stopwatch.Start();
 
             for (int i = 0; i < 5; i++)
             {
@@ -213,8 +213,6 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static void MultiplicationGame()
         {
-            stopwatch.Start();
-
             points = 0;
 
             MultiplicationQuestions();
@@ -234,6 +232,8 @@ namespace MathGame.navarrolagapabloanton_ctrl
         public static void MultiplicationQuestions()
         {
             string difficulty = InputLevel();
+
+            stopwatch.Start();
 
             for (int i = 0; i < 5; i++)
             {
@@ -256,8 +256,6 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static void DivisionGame()
         {
-            stopwatch.Start();
-
             points = 0;
 
             DivisionQuestions();
@@ -278,24 +276,16 @@ namespace MathGame.navarrolagapabloanton_ctrl
         {
             string difficulty = InputLevel();
 
+            stopwatch.Start();
+
             for (int i = 0; i < 5; i++)
             {
                 int numberA = RandomNum(difficulty);
-                int numberB = RandomNum(difficulty) + 1;
+                int numberB = RandomNum(difficulty);
 
-                while (numberA < numberB)
-                {
-                    numberA = RandomNum(difficulty);
-                }
-
-                while (numberA % numberB != 0)
+                while (numberB == 0 || numberA % numberB != 0)
                 {
                     numberB = RandomNum(difficulty);
-
-                    if (numberB == 0)
-                    {
-                        numberB += numberB + 1;
-                    }
                 }
 
                 Console.Write($"\n{i + 1}. {numberA} / {numberB} = ");
@@ -314,8 +304,6 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static void RandomGame()
         {
-            stopwatch.Start();
-
             points = 0;
 
             RandomQuestions();
@@ -336,10 +324,12 @@ namespace MathGame.navarrolagapabloanton_ctrl
         {
             string difficulty = InputLevel();
 
+            stopwatch.Start();
+
             for (int i = 0; i < 5; i++)
             {
                 int numberA = RandomNum(difficulty);
-                int numberB = RandomNum(difficulty) + 1;
+                int numberB = RandomNum(difficulty);
 
                 int randomOperation = RandomNum("b"); // 0-25 (Addition), 25-50 (Substraction), 50-75 (Multiplication) and 75-100 (Division).
 
@@ -387,19 +377,9 @@ namespace MathGame.navarrolagapabloanton_ctrl
                 }
                 else
                 {
-                    while (numberA < numberB)
-                    {
-                        numberA = RandomNum(difficulty);
-                    }
-
-                    while (numberA % numberB != 0)
+                    while (numberB == 0 || numberA % numberB != 0)
                     {
                         numberB = RandomNum(difficulty);
-
-                        if (numberB == 0)
-                        {
-                            numberB += numberB + 1;
-                        }
                     }
 
                     Console.Write($"\n{i + 1}. {numberA} / {numberB} = ");
@@ -434,8 +414,6 @@ namespace MathGame.navarrolagapabloanton_ctrl
 
         public static string InputLevel()
         {
-            
-
             while (true)
             {
                 DifficultMenu();
